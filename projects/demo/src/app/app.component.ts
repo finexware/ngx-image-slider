@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   NgxMatCarouselSlideComponent,
   Orientation
-} from 'ngx-mat-carousel';
+} from '@anjotadena/ngx-mat-carousel';
 
 @Component({
   selector: 'mat-root',
@@ -13,7 +13,7 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private static readonly installText = 'npm install ngx-mat-carousel';
+  private static readonly installText = 'npm install @anjotadena/ngx-mat-carousel';
 
   @ViewChildren(NgxMatCarouselSlideComponent) public carouselSlides: QueryList<
     NgxMatCarouselSlideComponent

@@ -1,5 +1,5 @@
 {
-  "name": "ngx-mat-carousel",
+  "name": "@anjotadena/ngx-mat-carousel",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
