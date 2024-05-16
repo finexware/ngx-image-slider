@@ -210,7 +210,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@anjotadena/ngx-mat-carousel
+ngx-image-slider
 MIT
 
 regenerator-runtime
