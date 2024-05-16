@@ -10,12 +10,12 @@
       "prefix": "mat",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/carousel/tsconfig.lib.json",
             "project": "projects/carousel/ng-package.json"
@@ -28,18 +28,19 @@
             "tsConfig": "projects/carousel/tsconfig.spec.json",
             "karmaConfig": "projects/carousel/karma.conf.js",
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/carousel/src/styles"]
+              "includePaths": [
+                "projects/carousel/src/styles"
+              ]
             }
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/carousel/tsconfig.lib.json",
-              "projects/carousel/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/carousel/**/*.ts",
+              "projects/carousel/**/*.html"
+            ]
           }
         }
       }
@@ -51,7 +52,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
@@ -67,8 +68,17 @@
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets"
             ],
-            "styles": ["projects/demo/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "projects/demo/src/styles.scss"
+            ],
+            "scripts": [],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -81,7 +91,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -95,7 +104,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -121,7 +131,9 @@
             "polyfills": "projects/demo/src/polyfills.ts",
             "tsConfig": "projects/demo/tsconfig.spec.json",
             "karmaConfig": "projects/demo/karma.conf.js",
-            "styles": ["projects/demo/src/styles.scss"],
+            "styles": [
+              "projects/demo/src/styles.scss"
+            ],
             "scripts": [],
             "assets": [
               "projects/demo/src/favicon.ico",
@@ -130,17 +142,26 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/demo/tsconfig.app.json",
-              "projects/demo/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/demo//**/*.ts",
+              "projects/demo//**/*.html"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "carousel"
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  },
+  "cli": {
+    "analytics": "1c24a518-d626-41cd-b404-4455ca91b59c"
+  }
 }

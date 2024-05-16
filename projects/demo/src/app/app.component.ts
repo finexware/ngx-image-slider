@@ -3,22 +3,24 @@ import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
-  MatCarouselSlideComponent,
+  NgxMatCarouselSlideComponent,
   Orientation
-} from '@ngmodule/material-carousel';
+} from 'ngx-mat-carousel';
 
 @Component({
-  selector: 'app-root',
+  selector: 'mat-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private static readonly INSTALL_TEXT =
-    'npm install @ngmodule/material-carousel';
+  private static readonly installText = 'npm install ngx-mat-carousel';
+
+  @ViewChildren(NgxMatCarouselSlideComponent) public carouselSlides: QueryList<
+    NgxMatCarouselSlideComponent
+  >;
 
   public slidesList = new Array<never>(5);
   public showContent = false;
-
   public parentHeight = 'auto';
   public timings = '250ms ease-in';
   public autoplay = true;
@@ -38,12 +40,7 @@ export class AppComponent {
   public useMouseWheel = false;
   public orientation: Orientation = 'ltr';
   public log: string[] = [];
-
-  @ViewChildren(MatCarouselSlideComponent) public carouselSlides: QueryList<
-    MatCarouselSlideComponent
-  >;
   public darkMode = false;
-
   public get code(): string {
     return `
 <div [style.height]="${this.parentHeight}">
@@ -63,7 +60,7 @@ export class AppComponent {
     orientation="${this.orientation}"
   >
     <mat-carousel-slide
-      #matCarouselSlide
+      #NgxMatCarouselSlide
       *ngFor="let slide of slides; let i = index"
       [image]="slide.image"
       overlayColor="${this.overlayColor}"
@@ -79,10 +76,10 @@ export class AppComponent {
       style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
     >
       <h1>{{ i }}</h1>
-      <p>disabled: {{ matCarouselSlide.disabled }}</p>
+      <p>disabled: {{ NgxMatCarouselSlide.disabled }}</p>
       <button
         mat-flat-button
-        (click)="matCarouselSlide.disabled = !matCarouselSlide.disabled"
+        (click)="NgxMatCarouselSlide.disabled = !NgxMatCarouselSlide.disabled"
       >
         Click me!
       </button>
@@ -115,7 +112,7 @@ export class AppComponent {
 
   public copy(): void {
     const textarea = document.createElement('textarea');
-    textarea.value = AppComponent.INSTALL_TEXT;
+    textarea.value = AppComponent.installText;
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'absolute';
     textarea.style.left = '-99999px';
@@ -135,6 +132,6 @@ export class AppComponent {
   }
 
   public onChange(index: number) {
-    this.log.push(`MatCarousel#change emitted with index ${index}`);
+    this.log.push(`NgxMatCarousel#change emitted with index ${index}`);
   }
 }

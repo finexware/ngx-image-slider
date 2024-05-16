@@ -8,22 +8,24 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { MatCarouselSlide } from './carousel-slide';
+import { NgxMatCarouselSlide } from './carousel-slide';
 
 @Component({
   selector: 'mat-carousel-slide',
   templateUrl: './carousel-slide.component.html',
   styleUrls: ['./carousel-slide.component.scss']
 })
-export class MatCarouselSlideComponent
-  implements ListKeyManagerOption, MatCarouselSlide, OnInit {
+export class NgxMatCarouselSlideComponent
+  implements ListKeyManagerOption, NgxMatCarouselSlide, OnInit {
   @Input() public image: SafeStyle;
   @Input() public overlayColor = '#00000040';
   @Input() public hideOverlay = false;
+  @Input() public ariaLabel = '';
   @Input() public disabled = false; // implements ListKeyManagerOption
+  @Input() public load = false;
 
   @ViewChild(TemplateRef) public templateRef: TemplateRef<any>;
-    
+
   constructor(public sanitizer: DomSanitizer) {
   }
 

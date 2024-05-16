@@ -10,12 +10,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noUnusedLocals": true,
-    "target": "es5",
+    "target": "es2020",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ngmodule/material-carousel": ["dist/carousel"],
-      "@ngmodule/material-carousel/*": ["dist/carousel/*"]
+      "ngx-mat-carousel": ["dist/carousel"],
+      "ngx-mat-carousel/*": ["dist/carousel/*"]
     },
     "plugins": [
       { "name": "@angular/language-service" },
@@ -24,5 +24,13 @@
         "alwaysShowRuleFailuresAsWarnings": true
       }
     ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true,
+    "enableIvy": false
   }
 }

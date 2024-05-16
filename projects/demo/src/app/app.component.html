@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>material2-carousel</span>
+  <span>ngx-mat-carousel</span>
 
   <span class="demo-spacer"></span>
 
@@ -13,7 +13,7 @@
       (click)="copy()"
     >
       <mat-icon>assignment</mat-icon>
-      npm install @ngmodule/material-carousel
+      npm install ngx-mat-carousel
     </button>
   </span>
 
@@ -23,7 +23,7 @@
     </button>
     <mat-menu #demoMenu="matMenu">
       <a
-        href="https://github.com/gbrlsnchs/material2-carousel"
+        href="https://github.com/anjotadena/ngx-mat-carousel"
         target="_blank"
         mat-menu-item
       >
@@ -166,7 +166,7 @@
               <mat-select
                 placeholder="Orientation"
                 [(value)]="orientation"
-                (selectionChange)="matCarousel.slideTo(0)"
+                (selectionChange)="NgxMatCarousel.slideTo(0)"
               >
                 <mat-option value="ltr">Left to right</mat-option>
                 <mat-option value="rtl">Right to left</mat-option>
@@ -205,7 +205,7 @@
 
       <div class="demo-carousel" [style.height]="parentHeight">
         <mat-carousel
-          #matCarousel
+          #NgxMatCarousel
           [timings]="timings"
           [autoplay]="autoplay"
           [interval]="interval"
@@ -213,6 +213,7 @@
           [hideArrows]="hideArrows"
           [hideIndicators]="hideIndicators"
           [color]="color"
+          [lazyLoad]="true"
           [maxWidth]="maxWidth"
           [proportion]="proportion"
           [useKeyboard]="useKeyboard"
@@ -224,9 +225,9 @@
           (change)="onChange($event)"
         >
           <mat-carousel-slide
-            #matCarouselSlide
+            #NgxMatCarouselSlide
             *ngFor="let slide of slidesList; let i = index"
-            image="assets/demo.png"
+            image="assets/demo.png?{{i}}"
             [overlayColor]="overlayColor"
             [hideOverlay]="hideOverlay"
           >
@@ -235,11 +236,11 @@
                 style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
               >
                 <h1>{{ i }}</h1>
-                <p>disabled: {{ matCarouselSlide.disabled }}</p>
+                <p>disabled: {{ NgxMatCarouselSlide.disabled }}</p>
                 <button
                   mat-flat-button
                   (click)="
-                    matCarouselSlide.disabled = !matCarouselSlide.disabled
+                    NgxMatCarouselSlide.disabled = !NgxMatCarouselSlide.disabled
                   "
                 >
                   Click me!

@@ -1,43 +1,38 @@
-import 'hammerjs';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { MatCarouselComponent } from './carousel.component';
-import { MatCarouselModule } from './carousel.module';
+import { NgxMatCarouselComponent } from './carousel.component';
+import { NgxMatCarouselModule } from './carousel.module';
 
 @Component({
   selector: 'mat-carousel-test-wrapper-component',
-  template: `
-    <mat-carousel [autoplay]="false">
-      <mat-carousel-slide *ngFor="let slide of slides"></mat-carousel-slide>
-    </mat-carousel>
-  `
+  template: '<mat-carousel [autoplay]="false"><mat-carousel-slide *ngFor="let slide of slides"></mat-carousel-slide></mat-carousel>'
 })
-class MatCarouselTestWrapperComponent {
+class NgxMatCarouselTestWrapperComponent {
   public slides = new Array<never>(5);
 }
 
-describe('MatCarouselComponent', () => {
-  let component: MatCarouselComponent;
-  let fixture: ComponentFixture<MatCarouselTestWrapperComponent>;
+describe('NgxMatCarouselComponent', () => {
+  let component: NgxMatCarouselComponent;
+  let fixture: ComponentFixture<NgxMatCarouselTestWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MatCarouselTestWrapperComponent],
+      declarations: [NgxMatCarouselTestWrapperComponent],
       imports: [
         NoopAnimationsModule,
         MatButtonModule,
         MatIconModule,
-        MatCarouselModule
+        NgxMatCarouselModule
       ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatCarouselTestWrapperComponent);
+    fixture = TestBed.createComponent(NgxMatCarouselTestWrapperComponent);
     component = fixture.debugElement.children[0].componentInstance;
 
     fixture.detectChanges();
@@ -89,7 +84,7 @@ describe('MatCarouselComponent', () => {
 
   describe('@Output(change)', () => {
     beforeEach(() => {
-      spyOn(component.change, 'emit');
+      spyOn(component.changeEmitter, 'emit');
       component.loop = true;
     });
 
@@ -98,21 +93,21 @@ describe('MatCarouselComponent', () => {
       component.slideTo(idx);
       tick();
 
-      expect(component.change.emit).toHaveBeenCalledWith(idx);
+      expect(component.changeEmitter.emit).toHaveBeenCalledWith(idx);
     }));
 
     it('should emit when next is called', fakeAsync(() => {
       component.next();
       tick();
 
-      expect(component.change.emit).toHaveBeenCalledWith(1);
+      expect(component.changeEmitter.emit).toHaveBeenCalledWith(1);
     }));
 
     it('should emit when previous is called', fakeAsync(() => {
       component.previous();
       tick();
 
-      expect(component.change.emit).toHaveBeenCalledWith(component.slidesList.length - 1);
+      expect(component.changeEmitter.emit).toHaveBeenCalledWith(component.slidesList.length - 1);
     }));
 
     it('should emit when autoplay is set', fakeAsync(() => {
@@ -122,7 +117,7 @@ describe('MatCarouselComponent', () => {
 
       component.autoplay = false;
 
-      expect(component.change.emit).toHaveBeenCalledWith(1);
+      expect(component.changeEmitter.emit).toHaveBeenCalledWith(1);
     }));
   });
 });
